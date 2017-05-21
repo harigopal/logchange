@@ -1,5 +1,7 @@
 # Logchange
 
+[![Build Status](https://travis-ci.org/harigopal/logchange.svg?branch=master)](https://travis-ci.org/harigopal/logchange)
+
 Logchange is an alternative approach to managing a _changelog_. Instead of writing to a flat `CHANGELOG(.md)`, it logs
 changes to `.yaml` files containing a `timestamp`, the `title`, and a boolean `public`.
 
