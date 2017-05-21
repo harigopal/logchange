@@ -1,10 +1,20 @@
 # Logchange
 
-Logchange is an alternative approach to managing a _changelog_. Instead of writing to a `CHANGELOG.md`, it logs changes to `.yaml` files containing a `timestamp`, the `title`, and a boolean `public` (see _Usage_ section).
+Logchange is an alternative approach to managing a _changelog_. Instead of writing to a flat `CHANGELOG(.md)`, it logs
+changes to `.yaml` files containing a `timestamp`, the `title`, and a boolean `public`.
 
-Logchange can _release_ changes to a traditional flat `CHANGELOG.md` file. All changes (marked public) since the last one, will be added to this file.
+Logchange allows for two _release_ changelogs to be maintained - an exhaustive one for internal use, and a public one
+ to display to your users. It can _release_ a public and a private changelog with one command, assuming that `public`
+ boolean is correctly set (see _Usage_ section).
 
-This repository's _changelog_ is maintained using _logchange_. See the automatically generated `CHANGELOG.md` and individual entries in the `/changelog` directory. Go ahead, have a look.
+This repository's _changelog_ is maintained using _logchange_. Since this is a public repository, there are only public
+changes. See the automatically generated `changelog/2017-public.yaml`. Unreleased changes go to `changelog/unreleased`.
+
+## Why?
+
+It's good to let your users know what you're up to, and it's good to keep track of what changed over time. However, you
+don't need to tell your users about every single change - hence the `public` flag. The _YAML_ format just makes it
+easier to parse and _present_ the data on the front-end, while being readable and editable.
 
 ## Installation
 
@@ -25,7 +35,7 @@ Or install the gem with:
 If you've just completed work on a feature, log it with:
 
     $ logchange new "A cool new feature has been added"
-    Created ./changelog/201705/21-a-cool-new-feature-has-been-added.yml`
+    Created [..]/changelog/unreleased/20170521-a-cool-new-feature-has-been-added.yml`
 
 This will create a new timestamped `.yaml` file in the `changelog` folder. By default, the `public` flag for all changes
 will be set to `true`. You can change this if you want to prevent it from appearing in the release log.
@@ -42,10 +52,6 @@ If present, this template will be merged into the output.
 To _release_ all new _public_ changes to the flat file, run:
 
     $ logchange release [VERSION]
-
-You can preview what'll be added to `CHANGELOG.md` by running:
-
-    $ logchange preview
 
 ## Change template
 
@@ -64,7 +70,6 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/harigopal/logchange.
-
 
 ## License
 

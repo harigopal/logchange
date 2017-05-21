@@ -1,4 +1,3 @@
-require 'fileutils'
 require 'yaml'
 require 'time'
 
@@ -11,8 +10,7 @@ module Logchange
     end
 
     def execute
-      ensure_month_directory_exists
-      file_path = File.join(month_directory_path, filename)
+      file_path = File.join(unreleased_path, filename)
       File.write(file_path, log_contents)
       puts "Created #{file_path}"
     end
@@ -34,7 +32,7 @@ module Logchange
     end
 
     def filename
-      "#{Time.now.utc.day.to_s.rjust(2, '0')}-#{simplified_title}.yaml"
+      "#{datetime}-#{simplified_title}.yaml"
     end
 
     def simplified_title
@@ -43,17 +41,12 @@ module Logchange
       specials_removed.downcase
     end
 
-    def ensure_month_directory_exists
-      return if File.directory?(month_directory_path)
-      FileUtils.mkdir(month_directory_path)
+    def unreleased_path
+      File.join(Logchange.configuration.changelog_directory_path, 'unreleased')
     end
 
-    def month_directory_path
-      File.join(Logchange.configuration.changelog_directory_path, year_and_month)
-    end
-
-    def year_and_month
-      "#{Time.now.utc.year}#{Time.now.utc.month.to_s.rjust(2, '0')}"
+    def datetime
+      "#{Time.now.utc.year}#{Time.now.utc.month.to_s.rjust(2, '0')}#{Time.now.utc.day.to_s.rjust(2, '0')}"
     end
   end
 end

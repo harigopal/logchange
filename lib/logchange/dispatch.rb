@@ -1,5 +1,3 @@
-require 'fileutils'
-
 module Logchange
   # Routes the user's command to appropriate handler.
   class Dispatch
@@ -11,6 +9,8 @@ module Logchange
           Logchange::Initialize.new.execute
         when :new
           Logchange::Logger.new(ARGV[1]).execute
+        when :release
+          Logchange::Release.new.execute
         else
           raise "Unhandled command #{command}"
       end
@@ -19,8 +19,9 @@ module Logchange
     private
 
     def ensure_changelog_directory_exists
-      return if File.directory?(Logchange.configuration.changelog_directory_path)
-      raise "The 'changes' directory does not exist in this path. Create this directory, or change to the correct path."
+      path = File.join(Logchange.configuration.changelog_directory_path, 'unreleased')
+      return if File.directory?(path)
+      raise "The changelog directory does not exist in this path. Run 'logchange init', or change to the correct path."
     end
 
     def command
