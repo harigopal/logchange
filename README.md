@@ -1,18 +1,22 @@
 # Logchange
 
-Logchange is an alternative approach to managing a _changelog_. Instead of writing to a `CHANGELOG.md`, it logs changes to `.yaml` files. Each change gets its own file, with conventions that govern metadata.
+Logchange is an alternative approach to managing a _changelog_. Instead of writing to a `CHANGELOG.md`, it logs changes to `.yaml` files containing a `timestamp`, the `title`, and a boolean `public` (see _Usage_ section).
 
 Logchange can _release_ changes to a traditional flat `CHANGELOG.md` file. All changes (marked public) since the last one, will be added to this file.
 
-This repository's _changelog_ is maintained using _logchange_. See the automatically generated `CHANGELOG.md` and individual entries in the `/changes` directory. Go ahead, have a look.
-
-## Why?
-
-Do you work in a team with other programmers? Want a simpler way to log different changes, and commit messages won't do? `logchange` can help.
+This repository's _changelog_ is maintained using _logchange_. See the automatically generated `CHANGELOG.md` and individual entries in the `/changelog` directory. Go ahead, have a look.
 
 ## Installation
 
-Install the gem with:
+Add to your `Gemfile`:
+
+    gem 'logchange', '~> 0.1'
+
+And then:
+
+    $ bundle install
+
+Or install the gem with:
 
     $ gem install logchange
 
@@ -21,23 +25,35 @@ Install the gem with:
 If you've just completed work on a feature, log it with:
 
     $ logchange new "A cool new feature has been added"
-    Created ./changes/20170521020858-a-cool-new-feature-has-been-added.yml`
+    Created ./changelog/201705/21-a-cool-new-feature-has-been-added.yml`
 
-This will create a new timestamped `.yaml` file in the `changes` folder.
+This will create a new timestamped `.yaml` file in the `changelog` folder. By default, the `public` flag for all changes
+will be set to `true`. You can change this if you want to prevent it from appearing in the release log.
 
-You can also create a template `.yaml` file with:
+To alter the default template used, create a `changelog/template.yaml` file, and set custom keys in it:
 
-    $ logchange template
+    # changelog/template.yaml
 
-This will create a change file with all the default keys used by Logchange.
+    public: false
+    github_issue: Add a link to related Github issue, or delete this key.
 
-To _release_ all new changes to the flat file, run:
+If present, this template will be merged into the output.
+
+To _release_ all new _public_ changes to the flat file, run:
 
     $ logchange release [VERSION]
 
 You can preview what'll be added to `CHANGELOG.md` by running:
 
     $ logchange preview
+
+## Change template
+
+    ---
+    timestamp: 2017-05-21T06:45:08Z
+    title: The title for your change goes here. This string gets added to CHANGELOG.md upon release.
+    public: Defaults to 'true'. This means that the release command will add this change to CHANGELOG.md. Set to 'false' to prevent that.
+    additional_key_1: You can add any number of additional keys. Logchange will ignore these when writing CHANGELOG.md. Parsing / using these is up to you.
 
 ## Development
 

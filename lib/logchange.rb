@@ -1,5 +1,19 @@
 require 'logchange/version'
+require 'logchange/configuration'
+require 'logchange/dispatch'
+require 'logchange/initialize'
+require 'logchange/logger'
 
 module Logchange
-  # Your code goes here...
+  class << self
+    attr_writer :configuration
+
+    def configuration
+      @configuration ||= Logchange::Configuration.new
+    end
+
+    def configure
+      yield(configuration)
+    end
+  end
 end
