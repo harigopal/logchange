@@ -55,13 +55,13 @@ To _release_ all new _public_ changes to the flat file, run:
 
     $ logchange release [VERSION]
 
-## Change template
+## Change the template
 
     ---
     timestamp: 2017-05-21T06:45:08Z
     title: The title for your change goes here. This string gets added to CHANGELOG.md upon release.
-    public: Defaults to 'true'. This means that the release command will add this change to CHANGELOG.md. Set to 'false' to prevent that.
-    additional_key_1: You can add any number of additional keys. Logchange will ignore these when writing CHANGELOG.md. Parsing / using these is up to you.
+    public: Defaults to 'true'. This means that the release command will add this change to 'changelog/YEAR-public.yaml'. Set to 'false' to prevent that.
+    additional_key_1: You can add any number of additional keys - useful if you wish to present changelog entries with additional links / resources.
 
 ## Development
 
