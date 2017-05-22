@@ -4,9 +4,8 @@ require 'time'
 module Logchange
   # Logs a new change.
   class Logger
-    def initialize(title, public: true)
+    def initialize(title)
       @title = title
-      @public = public
     end
 
     def execute
@@ -20,8 +19,7 @@ module Logchange
     def log_contents
       YAML.dump({
         'timestamp' => Time.now.utc.iso8601,
-        'title' => @title,
-        'public' => @public
+        'title' => @title
       }.merge(template))
     end
 

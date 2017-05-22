@@ -10,7 +10,7 @@ module Logchange
         puts 'The changelog directory already exists. Cancelling.'
       else
         FileUtils.mkdir_p(path)
-        Logchange::Logger.new('Added logchange to project.', public: false).execute
+        Logchange::Logger.new('Added logchange to project.').execute
       end
     end
   end

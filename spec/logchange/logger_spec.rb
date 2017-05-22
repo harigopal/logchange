@@ -26,10 +26,9 @@ describe Logchange::Logger do
       FileUtils.rm(File.join(unreleased_path, filename))
     end
 
-    it 'creates a public changelog file' do
+    it 'creates a changelog file' do
       subject.execute
       log = YAML.load(File.read(File.join(unreleased_path, filename)))
-      expect(log['public']).to eq(true)
       expect(log['title']).to eq(title)
     end
 
@@ -60,7 +59,7 @@ describe Logchange::Logger do
         template_path = File.join(sample_path, 'changelog', 'template.yaml')
 
         template_contents = YAML.dump(
-          'public' => false,
+          'private' => true,
           'github_issue' => 'Add a link to related Github issue, or delete this key.'
         )
 
@@ -70,7 +69,7 @@ describe Logchange::Logger do
         log = YAML.load(File.read(File.join(unreleased_path, filename)))
         expect(log['title']).to eq(title)
         expect(log['github_issue']).to eq('Add a link to related Github issue, or delete this key.')
-        expect(log['public']).to eq(false)
+        expect(log['private']).to eq(true)
 
         # Expect another random key to be missing.
         expect(log['foo']).to eq(nil)

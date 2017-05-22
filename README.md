@@ -3,20 +3,22 @@
 [![Build Status](https://travis-ci.org/harigopal/logchange.svg?branch=master)](https://travis-ci.org/harigopal/logchange)
 
 Logchange is an alternative approach to managing a _changelog_. Instead of writing to a flat `CHANGELOG(.md)`, it logs
-changes to `.yaml` files containing a `timestamp`, the `title`, and a boolean `public`.
+changes to `.yaml` files containing a `timestamp` and a `title`. You can extend this format by adding any number of
+additional fields by specifying a template - allowing customization of the changelog to suit your needs.
 
-Logchange allows for two _release_ changelogs to be maintained - an exhaustive one for internal use, and a public one
- to display to your users. It can _release_ a public and a private changelog with one command, assuming that `public`
- boolean is correctly set (see _Usage_ section).
+Logchange allows you to _release_ changes; this allows you to group changes into versioned releases, or
+timed releases, depending on what your project needs. New entries are kept in `changelog/unreleased` until the `release`
+command is used to append it to `changelog/YEAR.yaml` file.
 
-This repository's _changelog_ is maintained using _logchange_. Since this is a public repository, there are only public
-changes. See the automatically generated `changelog/2017-public.yaml`. Unreleased changes go to `changelog/unreleased`.
+This repository's _changelog_ is maintained using _logchange_. See the automatically generated `changelog/2017.yaml`.
+Unreleased changes go to `changelog/unreleased`.
 
 ## Why?
 
-It's good to let your users know what you're up to, and it's good to keep track of what changed over time. However, you
-don't need to tell your users about every single change - hence the `public` flag. The _YAML_ format just makes it
-easier to parse and _present_ the data on the front-end, while being readable and editable.
+It's good to let your users know what you're up to, and it's good to keep track of what changed over time. If your
+project's code isn't public, it might make sense to include a `private` flag in your template and use that to show only
+a select list of changes to your users and the public. The _YAML_ format allows the changelog to be extended to fit your
+specific requirements. It also makes it easy to parse and _present_ the data on the front-end.
 
 ## Installation
 
@@ -39,29 +41,42 @@ If you've just completed work on a feature, log it with:
     $ logchange new "A cool new feature has been added"
     Created [..]/changelog/unreleased/20170521-a-cool-new-feature-has-been-added.yml`
 
-This will create a new timestamped `.yaml` file in the `changelog` folder. By default, the `public` flag for all changes
-will be set to `true`. You can change this if you want to prevent it from appearing in the release log.
+This will create a new timestamped `.yaml` file in the `changelog/unreleased` folder.
 
-To alter the default template used, create a `changelog/template.yaml` file, and set custom keys in it:
+```yaml
+timestamp: 2017-05-21T06:45:08Z
+title: The title for your change goes here.
+```
 
-    # changelog/template.yaml
-
-    public: false
-    github_issue: Add a link to related Github issue, or delete this key.
-
-If present, this template will be merged into the output.
+To extend the default template used, create a `changelog/template.yaml` file. See customization instructions below.
 
 To _release_ all new _public_ changes to the flat file, run:
 
-    $ logchange release [VERSION]
+    $ logchange release [TAG]
 
-## Change the template
+This will add all _unreleased_ changes to `changelog/YEAR.yaml`. The current set of changes will be grouped together,
+and the time of release will be recorded. You can optionally specify a _tag_ such as a version number. For example:
 
-    ---
-    timestamp: 2017-05-21T06:45:08Z
-    title: The title for your change goes here. This string gets added to CHANGELOG.md upon release.
-    public: Defaults to 'true'. This means that the release command will add this change to 'changelog/YEAR-public.yaml'. Set to 'false' to prevent that.
-    additional_key_1: You can add any number of additional keys - useful if you wish to present changelog entries with additional links / resources.
+    $ logchange release v0.1.1
+
+This will group current set of changes and add a `tag` key along with the release `timestamp`.
+
+## Customize the template
+
+Create a `changelog/template.yaml` file to add additional keys for information that you'd like to track in your project.
+
+```yaml
+# There will two keys by default - timestamp and title.
+# You can add any number of additional keys - this depends on your workflow.
+# A few examples are below.
+
+description: >
+  Add more detailed information
+  that spans multiple lines.
+
+github_issue_link: Add link to related Github issue.
+private: Hide this change from the public?
+```
 
 ## Development
 
