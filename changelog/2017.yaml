@@ -1,0 +1,15 @@
+---
+changelog:
+- timestamp: '2017-05-22T17:26:09Z'
+  tag: v0.0.2
+  changes:
+  - timestamp: '2017-05-22T17:26:00Z'
+    title: Make the release command functional.
+  - timestamp: '2017-05-22T14:51:26Z'
+    title: Remove the public flag from default set of keys.
+  - timestamp: '2017-05-22T14:46:57Z'
+    title: Alpha release of logchange.
+    public: true
+  - timestamp: '2017-05-22T14:46:09Z'
+    title: Added logchange to project.
+    public: false
