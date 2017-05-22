@@ -25,7 +25,7 @@ module Logchange
 
     def template
       template_path = File.join(Logchange.configuration.changelog_directory_path, 'template.yaml')
-      return {} unless File.exists?(template_path)
+      return {} unless File.exist?(template_path)
       YAML.load(File.read(template_path))
     end
 

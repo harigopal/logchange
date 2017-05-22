@@ -10,7 +10,7 @@ module Logchange
         when :new
           Logchange::Logger.new(ARGV[1]).execute
         when :release
-          Logchange::Release.new.execute
+          Logchange::Release.new(ARGV[1]).execute
         else
           raise "Unhandled command #{command}"
       end
