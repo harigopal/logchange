@@ -11,7 +11,7 @@ timed releases, depending on what your project needs. New entries are kept in `c
 command is used to append it to `changelog/YEAR.yaml` file.
 
 This repository's _changelog_ is maintained using _logchange_. See the automatically generated `changelog/2017.yaml`.
-Unreleased changes go to `changelog/unreleased`.
+Unreleased changes (if any) go to `changelog/unreleased`.
 
 ## Why?
 
@@ -39,7 +39,7 @@ Or install the gem with:
 If you've just completed work on a feature, log it with:
 
     $ logchange new "A cool new feature has been added"
-    Created [..]/changelog/unreleased/20170521-a-cool-new-feature-has-been-added.yml`
+    Created [..]/changelog/unreleased/20170521-a-cool-new-feature-has-been-added.yml
 
 This will create a new timestamped `.yaml` file in the `changelog/unreleased` folder.
 
@@ -48,7 +48,7 @@ timestamp: 2017-05-21T06:45:08Z
 title: The title for your change goes here.
 ```
 
-To extend the default template used, create a `changelog/template.yaml` file. See customization instructions below.
+To extend the default template used, create `changelog/template.yaml`. See customization instructions below.
 
 To _release_ all new _public_ changes to the flat file, run:
 
