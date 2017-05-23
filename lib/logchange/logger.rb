@@ -1,11 +1,14 @@
 require 'yaml'
 require 'time'
 
+require_relative 'template'
+
 module Logchange
   # Logs a new change.
   class Logger
-    def initialize(title)
+    def initialize(title, template: Logchange::Template.load)
       @title = title
+      @template = template
     end
 
     def execute
@@ -20,13 +23,7 @@ module Logchange
       YAML.dump({
         'timestamp' => Time.now.utc.iso8601,
         'title' => @title
-      }.merge(template))
-    end
-
-    def template
-      template_path = File.join(Logchange.configuration.changelog_directory_path, 'template.yaml')
-      return {} unless File.exist?(template_path)
-      YAML.load(File.read(template_path))
+      }.merge(@template))
     end
 
     def filename

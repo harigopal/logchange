@@ -8,7 +8,11 @@ module Logchange
         when :init
           Logchange::Initialize.new.execute
         when :new
-          Logchange::Logger.new(ARGV[1]).execute
+          if ARGV[1].nil?
+            Logchange::InteractiveLogger.new.execute
+          else
+            Logchange::Logger.new(ARGV[1]).execute
+          end
         when :release
           Logchange::Release.new(ARGV[1]).execute
         else

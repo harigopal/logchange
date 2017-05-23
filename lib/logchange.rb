@@ -3,6 +3,7 @@ require 'logchange/configuration'
 require 'logchange/dispatch'
 require 'logchange/initialize'
 require 'logchange/logger'
+require 'logchange/interactive_logger'
 require 'logchange/release'
 
 module Logchange

@@ -61,7 +61,7 @@ and the time of release will be recorded. You can optionally specify a _tag_ suc
 
 This will group current set of changes and add a `tag` key along with the release `timestamp`.
 
-## Customize the template
+### Customize the template
 
 Create a `changelog/template.yaml` file to add additional keys for information that you'd like to track in your project.
 
@@ -70,13 +70,26 @@ Create a `changelog/template.yaml` file to add additional keys for information t
 # You can add any number of additional keys - this depends on your workflow.
 # A few examples are below.
 
-description: >
-  Add more detailed information
-  that spans multiple lines.
-
+description: Add more detailed information about the change?
 github_issue_link: Add link to related Github issue.
-private: Hide this change from the public?
+private: Hide this change from the public? Set to true or false.
 ```
+
+### Interactive mode
+
+If the template is customized, you can use Logchange's interactive mode to supply required data, instead of passing it
+directly via the command:
+
+    $ logchange new
+    title: A cool new feature has been added.
+
+    github_issue_link: Add link to related Github issue.
+    https://github.com/harigopal/logchange/issues/1
+
+    private: Hide this change from the public? Set to true or false.
+    false
+
+    Created [..]/changelog/unreleased/20170521-a-cool-new-feature-has-been-added.yml
 
 ## Development
 
