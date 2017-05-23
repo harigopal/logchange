@@ -1,5 +1,10 @@
 ---
 changelog:
+- timestamp: '2017-05-23T15:42:28Z'
+  tag: v0.0.3
+  changes:
+  - timestamp: '2017-05-23T15:42:04Z'
+    title: Add the ability to interactively accept user input to form changelog.
 - timestamp: '2017-05-22T17:26:09Z'
   tag: v0.0.2
   changes:
