@@ -1,10 +1,10 @@
-require 'logchange/version'
-require 'logchange/configuration'
-require 'logchange/dispatch'
-require 'logchange/initialize'
-require 'logchange/logger'
-require 'logchange/interactive_logger'
-require 'logchange/release'
+require_relative 'logchange/version'
+require_relative 'logchange/configuration'
+require_relative 'logchange/dispatch'
+require_relative 'logchange/initialize'
+require_relative 'logchange/logger'
+require_relative 'logchange/interactive_logger'
+require_relative 'logchange/release'
 
 module Logchange
   class << self
