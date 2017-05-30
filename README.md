@@ -36,6 +36,17 @@ Or install the gem with:
 
 ## Usage
 
+    $ logchange
+    Usage: logchange COMMAND
+
+    Available commands:
+      init          - Initialize logchange at this location - creates
+                      the changelog directory.
+      new [MESSAGE] - Log a change. Skip the message to trigger
+                      interative mode.
+      release [TAG] - Releases changes in changelog/unreleased.
+                      Optionally, tag the release with a string.
+
 If you've just completed work on a feature, log it with:
 
     $ logchange new "A cool new feature has been added"
