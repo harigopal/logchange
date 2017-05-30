@@ -1,6 +1,7 @@
 require_relative 'template'
 
 module Logchange
+  # Accept change information from the user via command line prompts.
   class InteractiveLogger
     def initialize
       @title = nil

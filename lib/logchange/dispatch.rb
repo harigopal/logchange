@@ -16,7 +16,7 @@ module Logchange
         when :release
           Logchange::Release.new(ARGV[1]).execute
         else
-          raise "Unhandled command #{command}"
+          print_help
       end
     end
 
@@ -29,13 +29,22 @@ module Logchange
     end
 
     def command
-      return ARGV[0].to_sym if %w[init new release preview].include?(ARGV[0])
-      print_help
+      return ARGV[0].to_sym if %w[init new release].include?(ARGV[0])
+      :unknown
     end
 
     def print_help
-      # TODO: Write actual help response.
-      raise 'Unknown command encountered.'
+      puts <<~HELP
+        Usage: logchange COMMAND
+
+        Available commands:
+          init          - Initialize logchange at this location - creates
+                          the changelog directory.
+          new [MESSAGE] - Log a change. Skip the message to trigger
+                          interative mode.
+          release [TAG] - Releases changes in changelog/unreleased.
+                          Optionally, tag the release with a string.
+      HELP
     end
   end
 end
