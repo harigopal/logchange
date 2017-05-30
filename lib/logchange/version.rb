@@ -1,4 +1,4 @@
 module Logchange
-  # V0.0.X indicates alpha stage.
-  VERSION = -'0.0.4'
+  # Semantic Versioning. http://semver.org
+  VERSION = -'1.0.0'
 end
