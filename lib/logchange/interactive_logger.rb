@@ -37,12 +37,15 @@ module Logchange
       puts "#{key}: #{value}"
       user_input = STDIN.gets.chomp
 
-      # Preserve booleans.
-      if %w[true false].include?(user_input)
-        user_input = (user_input == 'true')
+      if user_input.length.positive?
+        # Preserve booleans.
+        if %w[true false].include?(user_input)
+          user_input = (user_input == 'true')
+        end
+
+        @template[key] = user_input
       end
 
-      @template[key] = user_input
       puts "\n"
     end
   end
