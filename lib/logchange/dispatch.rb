@@ -2,7 +2,7 @@ module Logchange
   # Routes the user's command to appropriate handler.
   class Dispatch
     def execute
-      ensure_changelog_directory_exists unless command == :init
+      ensure_changelog_directory_exists if %i[new release].include?(command)
 
       case command
         when :init
@@ -25,7 +25,7 @@ module Logchange
     def ensure_changelog_directory_exists
       path = File.join(Logchange.configuration.changelog_directory_path, 'unreleased')
       return if File.directory?(path)
-      raise "The changelog directory does not exist in this path. Run 'logchange init', or change to the correct path."
+      abort("The changelog directory does not exist in this path. Run 'logchange init', or change to the correct path.")
     end
 
     def command

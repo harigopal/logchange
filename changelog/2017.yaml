@@ -1,5 +1,10 @@
 ---
 changelog:
+- timestamp: '2017-05-30T14:56:19Z'
+  tag: v1.0.1
+  changes:
+  - timestamp: '2017-05-30T14:56:04Z'
+    title: Display error message instead of crashing for non-standard use.
 - timestamp: '2017-05-30T14:38:40Z'
   tag: v1.0.0
   changes:
