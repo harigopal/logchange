@@ -24,7 +24,7 @@ specific requirements. It also makes it easy to parse and _present_ the data on 
 
 Add to your `Gemfile`:
 
-    gem 'logchange', '~> 0.1'
+    gem 'logchange', '~> 1.0'
 
 And then:
 
